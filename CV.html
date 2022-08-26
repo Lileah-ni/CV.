@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- marlin-css -->
+    <link href="https://cdn.jsdelivr.net/npm/marlin-css@0.7.2/marlin.css" rel="stylesheet" type="text/css">
+    <!-- General Sans -->
+    <link href="https://api.fontshare.com/css?f[]=general-sans@1&display=swap" rel="stylesheet">
+    <!--  -->
+    <title>Soyless CV</title>
+    <!--  -->
+    <style>
+        /* MARLIN OVERRIDES */
+        :root {
+            --primary: #1b1b1b;
+            --text: #1b1b1b;
+            --secondary: #969696;
+            --font-display: 'General Sans', monospace;
+            --font-body: 'General Sans', monospace;
+            --factor-type-h1: 0.42;
+            --factor-type-h3: 0.26;
+            --master-h2-size: var(--master-body-1-size);
+            --master-h2-line-height: var(--master-body-2-line-height);
+        }
+
+        /* ROOT VARS */
+        :root {
+            --gap: calc(var(--sc-1) * 0.5);
+            --line: 0.5px solid var(--primary);
+        }
+
+        /* STYLE INIT */
+        h1 {
+            font-weight: 640;
+        }
+
+        h2 {
+            font-weight: 640;
+        }
+
+        h3 {
+            color: var(--secondary);
+            font-weight: 560;
+        }
+
+        /*  */
+        body {
+            padding: var(--sc-5) var(--sc-6);
+        }
+
+        /* PAGE CONSTRAINTS */
+        #page {
+            /* Enforce A4 aspect ratio */
+            aspect-ratio: 1 / 1.41421;
+            /* Convenient max-width */
+            /* max-width: 1080px; */
+            /* Pad the web preview (replaced with @page margin in print) */
+            padding: var(--sc-4);
+        }
+
+        /* PRINT */
+        @page {
+            size: A4;
+            margin: 8mm;
+        }
+
+        /* SPACING TOKENS */
+        :root {
+            --sp-0: 0.4vw;
+            --sc-1: 1.2vw;
+            --sp-2: 2vw;
+            --sp-3: 3.2vw;
+            --sp-4: 4vw;
+            --sp-5: 8vw;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+            }
+
+            /* RELATIVE FONT SIZES */
+            h1 {
+                font-size: var(--sp-4) !important;
+                line-height: var(--sp-5) !important;
+            }
+
+            h2 {
+                font-size: var(--sc-1) !important;
+                font-weight: 600 !important;
+                line-height: var(--sp-2) !important;
+            }
+
+            h3 {
+                font-size: calc(var(--sc-1)* 0.72) !important;
+                font-weight: 560 !important;
+                line-height: var(--sc-1) !important;
+                color: #A1A1A1;
+            }
+
+            h4 {
+                font-size: var(--sp-2);
+                font-weight: 640;
+            }
+
+            p {
+                font-size: var(--sc-1) !important;
+                font-weight: 400 !important;
+                line-height: calc(var(--sp-2) * 1.08) !important;
+            }
+
+            button {
+                display: none;
+            }
+
+            /* STRIP WEB ELEMENTS */
+            nav {
+                display: none;
+            }
+        }
+
+        main {
+            padding: var(--sc-4);
+        }
+
+        /* HEADER */
+        header {
+            margin-bottom: var(--sc-3);
+        }
+
+        /* RAIL | CONTACT */
+
+        #railContact h2 {
+            grid-column: span var(--cols-C);
+        }
+
+        #railContact>* {
+            margin-bottom: var(--sc-1);
+        }
+
+
+        #railContact .email {
+            font-weight: 600;
+        }
+
+        #railContact .social {
+            grid-column: span var(--cols-F);
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* SECTION */
+        section {
+            display: grid;
+            grid-template-columns: repeat(var(--cols-L), 1fr);
+            padding-top: var(--sc-1);
+            padding-bottom: var(--sc-1);
+        }
+
+        section>* {
+            padding-top: var(--sc-1);
+        }
+
+        /* OVERLINES */
+        .label,
+        .body,
+        .fragment,
+        .segment {
+            border-top: var(--line);
+        }
+
+        /* GAPS */
+        .label,
+        .fragment {
+            margin-right: var(--gap);
+        }
+
+        /* LABEL */
+        .label {
+            grid-column: span var(--cols-C);
+        }
+
+        /* BODY */
+        .body {
+            grid-column: span var(--cols-I);
+            display: grid;
+            grid-template-columns: repeat(var(--cols-I), 1fr);
+        }
+
+        .body p {
+            grid-column: span var(--cols-I);
+        }
+
+        #sectionTechnical .body,
+        #sectionCareer .body {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        /* FRAGMENT */
+        .fragment {
+            grid-column: span var(--cols-C);
+            padding-top: var(--sc-1);
+            padding-right: var(--sc-1);
+        }
+
+        .fragment:nth-child(-n+3) {
+            padding-bottom: var(--sc-1);
+        }
+
+        .fragment h2 {
+            padding-bottom: var(--sc-1);
+        }
+
+        /* CAREER */
+        .segment {
+            grid-column: span var(--cols-I);
+            padding-top: var(--sc-1);
+            padding-right: var(--sc-1);
+            padding-bottom: var(--sc-1);
+        }
+
+        .segment>* {
+            padding-bottom: var(--sp-0);
+        }
+
+        /* RESPONSIVE */
+
+        @media screen and (max-width: 864px) {
+
+            /* STRIP BORDERS ON MOBILE (to reduce double ups) */
+            .body,
+            .fragment,
+            .segment {
+                border-top: none;
+            }
+
+            section {
+                margin-top: var(--sc-6);
+            }
+
+            .label h2 {
+                display: none;
+            }
+
+            #railContact .social {
+                justify-content: flex-start;
+            }
+        }
+
+        /*  */
+    </style>
+</head>
+
+<body>
+
+    <div id="page">
+        <!-- TITLE -->
+        <header>
+            <h1>Leah Nipatvaranan.</h1>
+        </header>
+        <!-- RAIL | CONTACT -->
+        <div id="railContact" class="grid-12">
+            <h2 class="email">+61 4105 888 47</h2>
+            <h2>leah.sornsawan@gmail.com</h2>
+            <div class="social">
+                <h2>Melbourne 3000</h2>
+            </div>
+        </div>
+
+        <!-- SECTION | SUMMARY -->
+        <section id="sectionSummary">
+            <div class="label">
+                <h2>Summary</h2>
+            </div>
+
+            <div class="body">
+                <p>I'm focused on creating meaningful experiences through design.</p>
+                <br />
+                <p>I enjoy learning and solving problems.
+                    As I always seek inspiration on simple and clean design, tidying up things in the digital world is a passion. I specialize in Figma and Adobe XD and Photoshop.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION | TECHNICAL -->
+        <section id="sectionTechnical">
+            <div class="label">
+                <h2>Technical</h2>
+            </div>
+
+            <div class="body">
+                <!-- FRAGMENTS -->
+                <div class="fragment">
+                    <h2>UX Research</h2>
+                    <p>Understanding problem of users by collecting data and analysis process</p>
+                </div>
+                <div class="fragment">
+                    <h2>UI Prototyping</h2>
+                    <p>Building wireframes and prototypes based on user journey mapping and user flows</p>
+                </div>
+                <div class="fragment">
+                    <h2>Information Architecture</h2>
+                    <p>Structuring site content and functionality to reduce complexity of information</p>
+                </div>
+                <div class="fragment">
+                    <h2>Interaction Design</h2>
+                    <p>Generating exceptional interaction experiences on mobile and web</p>
+                </div>
+                <div class="fragment">
+                    <h2>Visual Design</h2>
+                    <p>Creating styleguide with accessible color, icon, strong layout and typography</p>
+                </div>
+                <div class="fragment">
+                    <h2>Usability Testing</h2>
+                    <p>Conducting user testing by providing scenario to collect feedback for improvement</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION | CAREER -->
+        <section id="sectionCareer">
+            <div class="label">
+                <h2>Career</h2>
+            </div>
+
+            <div class="body">
+                <!-- SEGMENTS -->
+                <div class="segment">
+                    <h2>Event Assistant</h2>
+                    <h6>Sidekicker</h6>
+                    <h3>2019-Presents / Melbourne, VIC</h3>
+                    <p>→ Supporting the events manager with logistical and administrative support</p>
+                    <p>→ Coordinating with venue staff to ensure that facilities are properly set up for an event</p>
+                    <p>→ Recording attendance at events by scanning tickets or checking names against a list of registered guests</p>
+                    <p>→ Setting up tables and chairs for events, as well as other tasks such as dusting or repairing broken items</p>
+                </div>
+                <div class="segment">
+                    <h2>Food and Service assistant</h2>
+                    <h6>Baptcare</h6>
+                    <h3>2020 / Melbourne, VIC</h3>
+                    <p>→ Delivering food from the kitchen to guests at the table or to a self-service area</p>
+                    <p>→ Greeting guests as they arrive at the venue, directing guests to tables, providing menus and taking orders</p>
+                    <p>→ Setting up marquees, arranging tables and assisting with the preparation of event spaces</p>
+                    <p>→ Assisting Chefs by washing vegetables, assembling sandwiches, sourcing ingredients from the stock room or plating up dishes</p>
+                    <p>→ Adhere to all relevant health department rules/regulations and all customer service guidelines</p>
+                </div>
+                <div class="segment">
+                    <h2>Casual Japanese interpreter</h2>
+                    <h6>H.I.S. International Tours.Inc</h6>
+                    <h3>2018 / Bangkok, THAILAND</h3>
+                    <p>→ Translate messages, live speeches, voice recordings and documents into another language, with careful attention to providing proper context, 
+                        meaning, tone and technical wording</p>
+                    <p>→ Collaborate with colleagues to compile helpful information, including terms and definitions, into an organized glossary for regular reference during the translation process</p>
+                    <p>→ Identify terms and words with conflicting meanings to determine which alternative provides clarity and reflects the original purpose of the message</p>
+                </div>
+                <div class="segment">
+                    <h2>Hall Staff</h2>
+                    <h6>Noku Hotel Cafe</h6>
+                    <h3>2016-2017 / Kyoto, JAPAN</h3>
+                    <p>→ Promptly address customer service issues and refer customers to management when necessary</p>
+                    <p>→ Cooperate and communicate with all serving and kitchen staff</p>
+                    <p>→ Handle complaints, provide appropriate solutions and alternatives within the time limits, and follow up to ensure resolution</p>
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION | EDUCATION -->
+        <section id="sectionCareer">
+            <div class="label">
+                <h2>Education</h2>
+            </div>
+
+            <div class="body">
+                <!-- SEGMENTS -->
+                <div class="segment">
+                    <h2>Monash University</h2>
+                    <h6>UX / UI design</h6>
+                    <h3>2022 / Melbourne, VIC</h3>
+                </div>
+                <div class="segment">
+                    <h2>Assumption University</h2>
+                    <h6>Bacherlor of Arts in Business Japanese</h6>
+                    <h3>2013-2018 / Bangkok, THAILAND</h3>
+                </div>
+                <div class="segment">
+                    <h2>Ryukoku University</h2>
+                    <h6>International studies</h6>
+                    <h3>2016-2017 / Kyoto, JAPAN</h3>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+
+</html>
